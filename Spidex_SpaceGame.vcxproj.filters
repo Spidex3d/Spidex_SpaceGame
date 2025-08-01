@@ -27,7 +27,7 @@
     <ClCompile Include="Engine\Engine\pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Engine\WindowsManager.cpp">
+    <ClCompile Include="Engine\Engine\Windows\WindowsManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,7 +41,7 @@
     <ClInclude Include="Engine\Engine\pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Engine\WindowsManager.h">
+    <ClInclude Include="Engine\Engine\Windows\WindowsManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

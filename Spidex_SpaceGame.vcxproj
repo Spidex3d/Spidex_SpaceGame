@@ -135,7 +135,7 @@
     <ClCompile Include="Editor\src\main.cpp" />
     <ClCompile Include="Engine\Engine\Engine.cpp" />
     <ClCompile Include="Engine\Engine\pch.cpp" />
-    <ClCompile Include="Engine\Engine\WindowsManager.cpp" />
+    <ClCompile Include="Engine\Engine\Windows\WindowsManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.vcxproj">
@@ -146,7 +146,7 @@
     <ClInclude Include="Engine\Engine\Engine.h" />
     <ClInclude Include="Engine\Engine\framework.h" />
     <ClInclude Include="Engine\Engine\pch.h" />
-    <ClInclude Include="Engine\Engine\WindowsManager.h" />
+    <ClInclude Include="Engine\Engine\Windows\WindowsManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

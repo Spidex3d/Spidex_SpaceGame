@@ -1,4 +1,3 @@
-#include "pch.h"
 #include "WindowsManager.h"
 
 WindowsManager::WindowsManager(int width, int height, const char* title)
