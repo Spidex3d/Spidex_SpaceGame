@@ -1,9 +1,27 @@
 #pragma once
 #include <imgui\imgui.h>
+#include <vector>
+#include <memory>
+#include "ECS\BaseModel.h"
+
+extern std::vector<std::unique_ptr<BaseModel>> ObjectVector; // the vector for all Models
+extern int currentIndex;
+
 
 extern const int SCR_WIDTH;
 extern const int SCR_HEIGHT;
 extern const char* SCR_TITLE;
+extern const char* SCR_TITLE_GAME;
+// Object type IDs
+extern const int MAIN_GRID;
+
+// Player object type IDs
+extern const int MAIN_PLAYER;
+
+// Enimy object type IDs
+extern const int MAIN_ENIMY;
+
+
 
 // Font indices for different font sizes
 enum FontIndex : int {
@@ -28,4 +46,3 @@ const ImVec4 COLOR_LIGHTBLUE(0.43f, 0.7f, 0.89f, 1.0f);
 const ImVec4 COLOR_LIGHTGREEN(0.0f, 0.9f, 0.0f, 1.0f);
 const ImVec4 COLOR_NONE(0.0f, 0.0f, 0.0f, 0.0f);
 
-extern const int MAIN_GRID;

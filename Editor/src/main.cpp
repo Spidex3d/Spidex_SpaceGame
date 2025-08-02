@@ -1,29 +1,16 @@
-#include "../../Engine/Engine/Engine.h"
-#include "GUI/MainScreen.h"
+//#include "../../Engine/Engine/Engine.h"
+//#include "GUI/MainScreen.h"
+#include "App.h"
 
+// This is my Spidex space game engine start date 30/07/2025
+// Spidex Space Horizon flying around in space collecting stuff and building a space comunity
+// I hate Programing
+// I hate Programing
+// I hate Programing
+// <It works.>
+// I Love Programing
 
 int main() {
-    Engine engine;
-    if (!engine.Init(1280, 720, "Spidex Space Game Editor")) {
-        return -1;
-    }
-    GLFWwindow* window = engine.GetWindow();
-
-    MainScreen::Instance()->SetUpImGui(window);
-
-    while (!engine.ShouldClose()) {
-        engine.PollEvents();
-        engine.BeginFrame();
-
-        MainScreen::Instance()->WinInit(window);
-
-        // TODO: Editor/game logic and rendering here
-
-		MainScreen::Instance()->RenderImGui(window);
-
-        engine.EndFrame();
-    }
-
-    engine.Shutdown();
-    return 0;
+	App::Instance()->RunApp();
+  
 }

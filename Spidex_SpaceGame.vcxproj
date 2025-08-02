@@ -131,6 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Editor\src\App.cpp" />
     <ClCompile Include="Editor\src\glad.c" />
     <ClCompile Include="Editor\src\GlobalVars.cpp" />
     <ClCompile Include="Editor\src\main.cpp" />
@@ -153,6 +154,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Editor\src\App.h" />
     <ClInclude Include="Editor\src\ECS\BaseModel.h" />
     <ClInclude Include="Editor\src\ECS\ObjectManager.h" />
     <ClInclude Include="Editor\src\ECS\SelectedObjectManager.h" />

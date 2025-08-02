@@ -1,6 +1,7 @@
 #include "MainScreen.h"
 #include <imgui\ImGuiAF.h>
 #include "../Editor/src/GlobalVars.h"
+#include "../../Engine/Engine/Engine.h"
 MainScreen* MainScreen::Instance()
 {
 	static MainScreen* screen = new MainScreen;
@@ -99,6 +100,123 @@ void MainScreen::MainDockSpace(bool* p_open)
     }
 }
 
+void MainScreen::MainSceneWindow(GLFWwindow* window)
+{
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(12, 12));
+    ImGui::Begin("Main scene");
+
+    // ##
+    const float window_width = ImGui::GetContentRegionAvail().x;
+    const float window_height = ImGui::GetContentRegionAvail().y;
+
+    //Rescale_frambuffer(window_width, window_height);
+    glViewport(0, 0, window_width, window_height);
+
+    ImVec2 pos = ImGui::GetCursorScreenPos();
+
+    //ImGui::GetWindowDrawList()->AddImage((void*)main_scene_texture_id, ImVec2(pos.x, pos.y),
+        //ImVec2(pos.x + window_width, pos.y + window_height), ImVec2(0, 1), ImVec2(1, 0));
+    // Detect right-click for popup menu 
+    if (ImGui::IsWindowHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_Right))
+    {
+        ImGui::OpenPopup("RightClickMenu");
+    }
+    // Create the right-click popup menu 
+    if (ImGui::BeginPopup("RightClickMenu"))
+    {
+
+        if (ImGui::BeginMenu("Add a new mesh")) {
+
+            if (ImGui::MenuItem("Obj File")) {
+                // set ShouldAddObjModel to true then add obj file to the tree
+                //ShouldAddObjModel = true;
+                //dialogType = false;   // sets is textured or obj file for the opendialog box
+
+            }
+            if (ImGui::MenuItem("Add Mesh File")) {
+
+                //ShouldAddEditMesh = true;
+                //dialogType = false;   // sets is textured or obj file for the opendialog box
+
+            }
+            if (ImGui::MenuItem("Cube")) {
+                // set ShouldAddCube to true then add cube to the tree
+                //ShouldAddCube = true;
+                //dialogType = true;   // sets dialogType is textured or obj file for the opendialog box
+
+            }
+            if (ImGui::MenuItem("Plane")) {
+                // set ShouldAddPlane to true then add plane to the tree
+                //ShouldAddPlane = true;
+                //dialogType = true;
+            }
+            if (ImGui::MenuItem("Circle")) {}
+            if (ImGui::MenuItem("Sphere")) {
+                //ShouldAddSphere = true;
+               // dialogType = true;   // sets dialogType is textured or obj file for the opendialog box
+            }
+            if (ImGui::MenuItem("Cylinder")) {}
+            if (ImGui::MenuItem("Torus")) {}
+            if (ImGui::MenuItem("Grid")) {}
+            if (ImGui::MenuItem("Cone")) {}
+            if (ImGui::MenuItem("Pyramid")) {
+                //ShouldAddPyramid = true;
+            }
+
+            ImGui::EndMenu();
+        }
+        if (ImGui::BeginMenu("Add a new Light")) {
+            if (ImGui::MenuItem("Sun Light")) {
+                //ShouldAddSunLight = true;
+               // LightSelector = LIGHT_SUN;
+            }
+            if (ImGui::MenuItem("Point Light")) {
+               // ShouldAddPointLight = true;
+               // LightSelector = LIGHT_POINT;
+            }
+            if (ImGui::MenuItem("Spot Light")) {
+               // ShouldAddSpotLight = true;
+               // LightSelector = LIGHT_SPOT;
+            }
+            if (ImGui::MenuItem("Area Light")) {
+                //ShouldAddAreaLight = true;
+                //LightSelector = LIGHT_AREA;
+            }
+
+            ImGui::EndMenu();
+        }
+        if (ImGui::BeginMenu("Add a Terrain")) {
+            if (ImGui::MenuItem("Terrain")) { // This is the main terrain
+                //ShouldAddTerrain = true;
+            }
+            if (ImGui::MenuItem("Water")) {}
+            if (ImGui::MenuItem("Floor")) {  // This is the floor
+                //ShouldAddFloor = true;
+            }
+
+            ImGui::EndMenu();
+        }
+        if (ImGui::BeginMenu("Add a Sky")) {
+            if (ImGui::MenuItem("Sky Box")) { // This is the main terrain
+
+            }
+            if (ImGui::MenuItem("Hemisphere")) {
+            }
+            if (ImGui::MenuItem("HDRI Skybox")) {  // This is the floor
+                
+            }
+
+            ImGui::EndMenu();
+        }
+
+        ImGui::EndPopup();
+    }
+
+
+    ImGui::Text("Right-click for popup Menu.");
+    ImGui::End();
+    ImGui::PopStyleVar();
+}
 void MainScreen::MainMenuBar(GLFWwindow* window)
 {
     // This is my main window menu
@@ -233,6 +351,9 @@ void MainScreen::WinInit(GLFWwindow* window)
     bool p_open = true;
     MainScreen::MainDockSpace(&p_open); // The Doc Space
 }
+void MainScreen::Rescale_frambuffer(float width, float height)
+{
+}
 
 void MainScreen::RenderImGui(GLFWwindow* window)
 {
@@ -251,6 +372,8 @@ void MainScreen::RenderImGui(GLFWwindow* window)
         glfwMakeContextCurrent(backup_context);
     }
 }
+
+
 
 
 
