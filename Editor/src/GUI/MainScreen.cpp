@@ -105,28 +105,22 @@ void MainScreen::MainMenuBar(GLFWwindow* window)
     ImGui::BeginMainMenuBar();
     if (ImGui::BeginMenu("File"))
     {
-        if (ImGui::MenuItem("New Image"))
+        if (ImGui::MenuItem("New Level"))
         {
 
         }
-        if (ImGui::MenuItem("Open Image"))
+        if (ImGui::MenuItem("Open Level"))
         { 
 
         }
         
-        if (ImGui::MenuItem("Open Folder"))
-        {  
-
-        }
+       
         ImGui::Separator();
-        if (ImGui::MenuItem(ICON_FA_SAVE" Save Image"))
+        if (ImGui::MenuItem(ICON_FA_SAVE" Save Level"))
         {
 
         }
-        if (ImGui::MenuItem("Save As Image"))
-        {
-
-        }
+       
         ImGui::Separator();
         if (ImGui::MenuItem(ICON_FA_SIGN_OUT_ALT" Exit"))
         {
@@ -188,9 +182,9 @@ void MainScreen::MainMenuBar(GLFWwindow* window)
         }
         ImGui::EndMenu();
     }
-    if (ImGui::BeginMenu("Image"))
+    if (ImGui::BeginMenu("Run Game"))
     {
-        if (ImGui::MenuItem("Resize"))
+        if (ImGui::MenuItem("Run"))
         {
 
 

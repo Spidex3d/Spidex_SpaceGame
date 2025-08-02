@@ -132,11 +132,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Editor\src\glad.c" />
+    <ClCompile Include="Editor\src\GlobalVars.cpp" />
     <ClCompile Include="Editor\src\main.cpp" />
     <ClCompile Include="Engine\Engine\Engine.cpp" />
     <ClCompile Include="Engine\Engine\pch.cpp" />
     <ClCompile Include="Editor\src\GUI\MainScreen.cpp" />
     <ClCompile Include="Engine\Engine\Windows\WindowsManager.cpp" />
+    <ClCompile Include="Editor\src\ECS\EntityNode.cpp" />
     <ClCompile Include="Vendors\imgui\imgui.cpp" />
     <ClCompile Include="Vendors\imgui\imgui_demo.cpp" />
     <ClCompile Include="Vendors\imgui\imgui_draw.cpp" />
@@ -151,12 +153,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Editor\src\ECS\BaseModel.h" />
+    <ClInclude Include="Editor\src\ECS\ObjectManager.h" />
+    <ClInclude Include="Editor\src\ECS\SelectedObjectManager.h" />
     <ClInclude Include="Engine\Engine\Engine.h" />
     <ClInclude Include="Engine\Engine\framework.h" />
     <ClInclude Include="Editor\src\GlobalVars.h" />
     <ClInclude Include="Engine\Engine\pch.h" />
     <ClInclude Include="Editor\src\GUI\MainScreen.h" />
     <ClInclude Include="Engine\Engine\Windows\WindowsManager.h" />
+    <ClInclude Include="Editor\src\ECS\EntityNode.h" />
     <ClInclude Include="Vendors\imgui\imconfig.h" />
     <ClInclude Include="Vendors\imgui\imgui.h" />
     <ClInclude Include="Vendors\imgui\ImGuiAF.h" />

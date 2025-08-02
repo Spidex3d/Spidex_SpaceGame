@@ -54,6 +54,12 @@
     <ClCompile Include="Vendors\imgui\imgui_widgets.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Editor\src\ECS\EntityNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Editor\src\GlobalVars.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\Engine\Engine.h">
@@ -102,6 +108,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Vendors\imgui\imstb_truetype.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\src\ECS\BaseModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\src\ECS\EntityNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\src\ECS\ObjectManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Editor\src\ECS\SelectedObjectManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
