@@ -10,6 +10,11 @@ Engine::~Engine() {
     Shutdown();
 }
 
+GLFWwindow* Engine::GetWindow() const  // ############
+{
+    return windowManager ? windowManager->GetWindow() : nullptr;
+}
+
 bool Engine::Init(int width, int height, const char* title) {
     windowManager = new WindowsManager(width, height, title);
     if (!windowManager->GLFWInitialize()) {
@@ -17,7 +22,14 @@ bool Engine::Init(int width, int height, const char* title) {
         windowManager = nullptr;
         return false;
     }
+    else {
+	
+
     return true;
+
+    }
+
+	
 }
 
 void Engine::PollEvents() {
