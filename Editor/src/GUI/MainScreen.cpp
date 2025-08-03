@@ -124,16 +124,30 @@ void MainScreen::MainSceneWindow(GLFWwindow* window)
     // Create the right-click popup menu 
     if (ImGui::BeginPopup("RightClickMenu"))
     {
+        if (ImGui::BeginMenu("Add New Space")) {
+            if (ImGui::MenuItem("Add Star field")) {   
+             // this will be a skybox and the Player and the home base
+            }
+			if (ImGui::MenuItem("Add Planets")) {  // this will randomly add a set number of planets to the scene
+				//ShouldAddPlanet = true;
+                
+            }
+			if (ImGui::MenuItem("Add Asteroid's")) {  // this will randomly add asteroids to the scene
+				//ShouldAddAsteroid = true;
+               
+            }
+			if (ImGui::MenuItem("Add random space junk")) { // this will randomly add space junk to the scene
+				//ShouldAddSpaceJunk = true;
+               
+            }
+
+            ImGui::EndMenu();
+        }
 
         if (ImGui::BeginMenu("Add a new mesh")) {
 
-            if (ImGui::MenuItem("Obj File")) {
-                // set ShouldAddObjModel to true then add obj file to the tree
-                //ShouldAddObjModel = true;
-                //dialogType = false;   // sets is textured or obj file for the opendialog box
-
-            }
-            if (ImGui::MenuItem("Add Mesh File")) {
+            
+            if (ImGui::MenuItem("Add OBJ")) {
 
                 //ShouldAddEditMesh = true;
                 //dialogType = false;   // sets is textured or obj file for the opendialog box
@@ -150,15 +164,14 @@ void MainScreen::MainSceneWindow(GLFWwindow* window)
                 //ShouldAddPlane = true;
                 //dialogType = true;
             }
-            if (ImGui::MenuItem("Circle")) {}
             if (ImGui::MenuItem("Sphere")) {
                 //ShouldAddSphere = true;
-               // dialogType = true;   // sets dialogType is textured or obj file for the opendialog box
+               
             }
             if (ImGui::MenuItem("Cylinder")) {}
-            if (ImGui::MenuItem("Torus")) {}
+            
             if (ImGui::MenuItem("Grid")) {}
-            if (ImGui::MenuItem("Cone")) {}
+           
             if (ImGui::MenuItem("Pyramid")) {
                 //ShouldAddPyramid = true;
             }
@@ -197,12 +210,12 @@ void MainScreen::MainSceneWindow(GLFWwindow* window)
             ImGui::EndMenu();
         }
         if (ImGui::BeginMenu("Add a Sky")) {
-            if (ImGui::MenuItem("Sky Box")) { // This is the main terrain
+            if (ImGui::MenuItem("Sky Box")) { // This is the skybox on the main terrain
 
             }
             if (ImGui::MenuItem("Hemisphere")) {
             }
-            if (ImGui::MenuItem("HDRI Skybox")) {  // This is the floor
+            if (ImGui::MenuItem("HDRI Skybox")) {  
                 
             }
 

@@ -149,11 +149,6 @@
     <ClCompile Include="Vendors\imgui\imgui_widgets.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Engine\Engine.vcxproj">
-      <Project>{c029da08-36dd-4771-832e-ff0acdf5bc29}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="Editor\src\App.h" />
     <ClInclude Include="Editor\src\ECS\BaseModel.h" />
     <ClInclude Include="Editor\src\ECS\ObjectManager.h" />
@@ -180,6 +175,11 @@
     <None Include="Vendors\imgui\.editorconfig" />
     <None Include="Vendors\imgui\.gitattributes" />
     <None Include="Vendors\imgui\.gitignore" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Engine\Engine.vcxproj">
+      <Project>{c029da08-36dd-4771-832e-ff0acdf5bc29}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

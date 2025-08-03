@@ -1,0 +1,28 @@
+Ok this game will be where you have a small space ship to fly around in space dodging Asteroid's
+some of which can damage your ship, you can collect space junk and take back to the home planet and improve your base,
+as well as collecting space junk you will need to collect extera food and water, their will need to be other thing to collect, 
+
+The first thing we need is this menu to add the ship and the home base as well as the main star field,
+This will be the starting level or map, 
+if (ImGui::MenuItem("Add Star field")) {   
+ // this will be a skybox with a planet, moon and the Player and a small home base
+ // the moon will contain resources to mine, the planet will be habitable and have food and water
+ // the starting position of the player will be at the home base
+}
+move for level to level
+
+new level
+save level
+Save the game state so that the player can return to the same place later.
+open saved game state
+
+heads-up display in the game
+Sound effects for ship movement, collecting items, and damage taken.
+
+at some point you can update your ship. 
+add the ability to add vidio of take off and landing on planets,
+have the ability to add to the home base so you can grow food and water, as well as build a ship yard to build new ships.
+maybe build an outpost on a planet to mine resources,
+Have some sort of population of the home planet counting how many people live there, and resources available, and needed to survive.
+we could add enemy at some point.
+mybe terrraform a planet to make it habitable,

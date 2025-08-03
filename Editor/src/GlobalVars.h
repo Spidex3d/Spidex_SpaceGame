@@ -6,6 +6,7 @@
 
 extern std::vector<std::unique_ptr<BaseModel>> ObjectVector; // the vector for all Models
 extern int currentIndex;
+extern char nameBuffer[128];
 
 
 extern const int SCR_WIDTH;

@@ -2,6 +2,8 @@
 
 std::vector<std::unique_ptr<BaseModel>> ObjectVector; // the vector for all Models
 int currentIndex = -1;
+char nameBuffer[128] = "";
+
 
 
 const int SCR_WIDTH = 1280;

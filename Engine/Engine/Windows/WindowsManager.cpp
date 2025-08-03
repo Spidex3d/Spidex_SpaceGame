@@ -1,5 +1,6 @@
 #include "WindowsManager.h"
 
+
 WindowsManager::WindowsManager(int width, int height, const char* title)
 	: width(width), height(height), title(title), window(nullptr) {}
 
