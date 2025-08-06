@@ -6,7 +6,7 @@ class Engine
 public:
     Engine();
     ~Engine();
-
+    // Lets remove this file and use windowManager insted
     GLFWwindow* GetWindow() const;
 
     bool Init(int width, int height, const char* title);

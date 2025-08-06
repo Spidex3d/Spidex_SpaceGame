@@ -4,7 +4,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
+#include "../../Engine/Engine/Render/RenderDraw.h"
 #include "GUI/MainScreen.h"
 
 class App
@@ -19,9 +19,9 @@ public:
 
     void RunApp();
 
-   // void MainCamera();
-    //glm::mat4 GetViewMatrix();
-    //glm::mat4 GetProjectionMatrix(float aspectRatio);
+    void MainCamera();
+    glm::mat4 GetViewMatrix();
+    glm::mat4 GetProjectionMatrix(float aspectRatio);
 
    // void Timer();
 
@@ -29,6 +29,7 @@ public:
 
 private:
     GLFWwindow* window;
+
     glm::mat4 viewMatrix;
     glm::mat4 projectionMatrix;
 

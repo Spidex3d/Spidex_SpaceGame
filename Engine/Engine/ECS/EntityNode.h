@@ -1,14 +1,17 @@
 #pragma once
 #include <vector>
 #include <memory>
+#include <glm/glm.hpp>
 #include "BaseModel.h"
-#include "SelectedObjectManager.h"
+#include "../Editor/src/ECS/SelectedObjectManager.h"
 #include <imgui\imgui.h>
 
 
-class EntityNode
+class EntityNode : public BaseModel
 {
 public:
+
+	//glm::mat4 modelMatrix;
 
 	static EntityNode* Instance();
 
@@ -19,10 +22,19 @@ public:
 	void EntityManagmentSystem(std::vector<std::unique_ptr<BaseModel>>& ObjectVector, int& currentIndex,
 		int& index, int& objectIndex, int& indexTypeID);
 
+	// Render the editor Grid
+	void RenderGrid(const glm::mat4& view, const glm::mat4& projection,
+		std::vector<std::unique_ptr<BaseModel>>& ObjectVector, int& currentIndex, int& Gridobjidx);
+
+	/*void RenderScene(const glm::mat4& view, const glm::mat4& projection,
+		std::vector<std::unique_ptr<BaseModel>>& ObjectVector, int& currentIndex, Shader& shader, Camera& camera);*/
+
 	void EntityMainBaseLevel(std::vector<std::unique_ptr<BaseModel>>& ObjectVector, int& currentIndex,
 		int& index, int& objectIndex, int& indexTypeID);
 
 private:
+
+	glm::mat4 modelMatrix;
 
 	void onRightClick(int objectId) {
 		if (ImGui::IsItemClicked(ImGuiMouseButton_Right)) {
@@ -30,5 +42,7 @@ private:
 		}
 
 	}
+
+	
 };
 

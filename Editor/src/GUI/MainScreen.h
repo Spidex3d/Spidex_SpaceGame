@@ -20,7 +20,9 @@ public:
 
 	void WinInit(GLFWwindow* window);		  // new frame, menu and dockspace
 
-	void Rescale_frambuffer(float width, float height); // Rescale the frame buffer to the window size
+	
+	
+	
 
 	void RenderImGui(GLFWwindow* window);     // imgui main imgui rendering
 

@@ -1,6 +1,10 @@
 #include "pch.h"
 #include "Engine.h"
 #include <iostream>
+#include "../Editor/src/GUI/MainScreen.h"
+
+// Lets remove this file and use windowManager insted
+// Like in the old engine
 
 Engine::Engine()
     : windowManager(nullptr) {
@@ -23,7 +27,8 @@ bool Engine::Init(int width, int height, const char* title) {
         return false;
     }
     else {
-	
+       // MainScreen::Instance()->SetUpImGui(windowManager->GetWindow());
+       // MainScreen::Instance()->WinInit(windowManager->GetWindow()); // new imgui frame, menu and dockspace
 
     return true;
 

@@ -3,7 +3,10 @@
 #include <imgui\imgui.h>
 #include <imgui\imgui_internal.h>
 #include <iostream>
-#include "..\GlobalVars.h"
+#include "../../../Editor/src/GlobalVars.h"
+#include "../../../Engine/Engine/Shader/ShaderManager.h"
+#include "../../../Engine/Engine/ECS/ObjectManager.h"
+#include "../../../Editor/src/ECS/SelectedObjectManager.h"
 
 EntityNode* EntityNode::Instance()
 {
@@ -12,6 +15,10 @@ EntityNode* EntityNode::Instance()
 
 void EntityNode::Initialize()
 {
+    BaseModel* selectedData = nullptr;  // Define the external variable
+
+    // Add The Default editor grid on start up                       TO DO ADD THIS TO SETTINGS
+    ObjectVector.push_back(std::make_unique<MainGrid>(0, "Main Grid", grid_square, grid_size));
 }
 
 std::vector<std::unique_ptr<BaseModel>>& EntityNode::GetModels()
@@ -208,6 +215,32 @@ void EntityNode::EntityManagmentSystem(std::vector<std::unique_ptr<BaseModel>>& 
     }
     ImGui::End();
 }
+
+// Render Grid
+void EntityNode::RenderGrid(const glm::mat4& view, const glm::mat4& projection,
+    std::vector<std::unique_ptr<BaseModel>>& ObjectVector, int& currentIndex, int& Gridobjidx)
+{
+    ShaderManager::defaultGridShader->Use();
+    ShaderManager::defaultGridShader->setMat4("projection", projection);
+    ShaderManager::defaultGridShader->setMat4("view", view);
+
+    for (const auto& model : ObjectVector) {  // ObjectVector = 1
+        if (auto* grid = dynamic_cast<MainGrid*>(model.get())) {
+
+            glm::mat4 modelMatrix = glm::mat4(1.0f);
+            modelMatrix = glm::translate(modelMatrix, glm::vec3(0.0f, -0.5f, 0.0f));
+            modelMatrix = glm::scale(modelMatrix, glm::vec3(20.0f, 0.0f, 20.0f));
+            ShaderManager::defaultGridShader->setMat4("model", modelMatrix);
+
+            grid->DrawGrid();
+        }
+    }
+}
+// pull together all the items to render and render them all at once
+//void EntityNode::RenderScene(const glm::mat4& view, const glm::mat4& projection,
+//    std::vector<std::unique_ptr<BaseModel>>& ObjectVector, int& currentIndex, Shader& shader, Camera& camera)
+//{
+//}
 
 void EntityNode::EntityMainBaseLevel(std::vector<std::unique_ptr<BaseModel>>& ObjectVector,
     int& currentIndex, int& index, int& objectIndex, int& indexTypeID)

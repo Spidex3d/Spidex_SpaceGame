@@ -1,18 +1,29 @@
 #pragma once
+#include <glad/glad.h>
 #include <imgui\imgui.h>
 #include <vector>
 #include <memory>
-#include "ECS\BaseModel.h"
+#include "../../Engine/Engine/ECS/BaseModel.h"
 
 extern std::vector<std::unique_ptr<BaseModel>> ObjectVector; // the vector for all Models
 extern int currentIndex;
 extern char nameBuffer[128];
+
+extern GLuint main_scene_texture_id; // Main scene texture ID
+
+// Grid
+extern bool gridNogrid; // toggle for grid visibility
+extern float grid_square;
+extern int grid_size;
 
 
 extern const int SCR_WIDTH;
 extern const int SCR_HEIGHT;
 extern const char* SCR_TITLE;
 extern const char* SCR_TITLE_GAME;
+
+extern int Gridobjidx;
+
 // Object type IDs
 extern const int MAIN_GRID;
 

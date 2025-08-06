@@ -7,6 +7,7 @@ public:
 	WindowsManager(int width, int height, const char* title);
 	~WindowsManager();
 	bool GLFWInitialize();
+
 	GLFWwindow* GetWindow() const;
 
 

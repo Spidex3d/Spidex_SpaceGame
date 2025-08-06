@@ -3,7 +3,7 @@
 #include <vector>
 #include <string>
 #include "BaseModel.h"
-#include "../GlobalVars.h" // For MAIN_GRID constant
+#include "../../../Editor/src/GlobalVars.h" // For MAIN_GRID constant
 
 class MainGrid : public BaseModel {
 

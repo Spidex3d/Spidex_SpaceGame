@@ -2,6 +2,7 @@
 #include <imgui\ImGuiAF.h>
 #include "../Editor/src/GlobalVars.h"
 #include "../../Engine/Engine/Engine.h"
+#include "../../Engine/Engine/Render/RenderDraw.h"
 MainScreen* MainScreen::Instance()
 {
 	static MainScreen* screen = new MainScreen;
@@ -114,8 +115,8 @@ void MainScreen::MainSceneWindow(GLFWwindow* window)
 
     ImVec2 pos = ImGui::GetCursorScreenPos();
 
-    //ImGui::GetWindowDrawList()->AddImage((void*)main_scene_texture_id, ImVec2(pos.x, pos.y),
-        //ImVec2(pos.x + window_width, pos.y + window_height), ImVec2(0, 1), ImVec2(1, 0));
+    ImGui::GetWindowDrawList()->AddImage((void*)main_scene_texture_id, ImVec2(pos.x, pos.y),
+        ImVec2(pos.x + window_width, pos.y + window_height), ImVec2(0, 1), ImVec2(1, 0));
     // Detect right-click for popup menu 
     if (ImGui::IsWindowHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_Right))
     {
@@ -364,9 +365,7 @@ void MainScreen::WinInit(GLFWwindow* window)
     bool p_open = true;
     MainScreen::MainDockSpace(&p_open); // The Doc Space
 }
-void MainScreen::Rescale_frambuffer(float width, float height)
-{
-}
+
 
 void MainScreen::RenderImGui(GLFWwindow* window)
 {
