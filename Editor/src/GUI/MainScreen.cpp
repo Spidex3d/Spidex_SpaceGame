@@ -1,8 +1,8 @@
 #include "MainScreen.h"
 #include <imgui\ImGuiAF.h>
 #include "../Editor/src/GlobalVars.h"
-#include "../../Engine/Engine/Engine.h"
 #include "../../Engine/Engine/Render/RenderDraw.h"
+
 MainScreen* MainScreen::Instance()
 {
 	static MainScreen* screen = new MainScreen;
@@ -110,7 +110,8 @@ void MainScreen::MainSceneWindow(GLFWwindow* window)
     const float window_width = ImGui::GetContentRegionAvail().x;
     const float window_height = ImGui::GetContentRegionAvail().y;
 
-    //Rescale_frambuffer(window_width, window_height);
+    RenderDraw::Instance()->Rescale_frambuffer(window_width, window_height);
+
     glViewport(0, 0, window_width, window_height);
 
     ImVec2 pos = ImGui::GetCursorScreenPos();

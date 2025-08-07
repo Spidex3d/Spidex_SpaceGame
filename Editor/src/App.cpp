@@ -1,12 +1,11 @@
 #include "App.h"
 #include "../Engine/Engine/Windows/WindowsManager.h"
-//#include "../../Engine/Engine/Engine.h"
 #include "GUI/MainScreen.h"
 #include "GlobalVars.h"
 
 #include "../../Engine/Engine/ECS/EntityNode.h"
-#include "../../Engine/Engine/Input/Input.h"
 #include "../../Engine/Engine/Camera/Camera.h"
+#include "../../Engine/Engine/Input/Input.h"
 #include "../../Engine/Engine/Shader/ShaderManager.h"
 
 App::App()
@@ -37,16 +36,6 @@ void App::RunApp()
         MainScreen::Instance()->SetUpImGui(windowManager.GetWindow());
     }
 
-    //Engine engine;
-    //if (!engine.Init(SCR_WIDTH, SCR_HEIGHT, SCR_TITLE)) {
-    //    return;
-    //}
-    //MainScreen::Instance()->Initialize(window);  //##########
-
-
-    //GLFWwindow* window = engine.GetWindow();
-
-    //MainScreen::Instance()->SetUpImGui(window);
 
     ShaderManager::SetupShaders(); // Initialize the shaders
 
@@ -59,10 +48,9 @@ void App::RunApp()
 
     // while (!engine.ShouldClose()) {
     while (AppIsRunning) {
-        //engine.PollEvents();
-        //engine.BeginFrame();
-
+        
         // Timer
+        App::Instance()->Timer();
 
 		if (glfwWindowShouldClose(windowManager.GetWindow())) {
 			AppIsRunning = false; // Exit the loop if the window should close
@@ -70,15 +58,11 @@ void App::RunApp()
 		processInput(windowManager.GetWindow()); // Process input events
 
 		MainScreen::Instance()->WinInit(windowManager.GetWindow()); // new imgui frame, menu and dockspace
-       // MainScreen::Instance()->WinInit(windowManager.GetWindow()); // Initialize all the above
-
+       
         MainScreen::Instance()->MainSceneWindow(windowManager.GetWindow()); // This is the main imgui drawing window for the editor
-        
-
 
         EntityNode::Instance()->EntityManagmentSystem(entityComponents.GetModels(), currentIndex,
             index, objectIndex, indexTypeID); // Entity Management System Scene list
-
         
         // ############################################# Camera Object !!! ################################
 
@@ -88,7 +72,6 @@ void App::RunApp()
 		MainScreen::Instance()->ClearScreen(); // Clear the screen
 
         App::MainCamera(); // ########## This is the main Camera ##########
-        // TODO: Editor/game logic and rendering here
         // Render the grid and then have a coffee
         if (!gridNogrid) {   // Show the grid or hide it
             EntityNode::Instance()->RenderGrid(camera.GetViewMatrix(),
@@ -96,6 +79,8 @@ void App::RunApp()
                 entityComponents.GetModels(), currentIndex, Gridobjidx);
 			
         }
+
+        // TODO: Editor/game logic and rendering here
 
         RenderDraw::Instance()->Unbinde_Frambuffer();
 
@@ -105,10 +90,8 @@ void App::RunApp()
 		glfwPollEvents(); // Poll for and process events
   
 		
-       // engine.EndFrame();
     }
 
-   // engine.Shutdown();
 	AppShutdown();
     
 }
@@ -136,6 +119,13 @@ glm::mat4 App::GetViewMatrix()
 glm::mat4 App::GetProjectionMatrix(float aspectRatio)
 {
     return projectionMatrix;
+}
+
+void App::Timer()
+{
+	float currentFrame = static_cast<float>(glfwGetTime());
+	deltaTime = currentFrame - lastFrame; // Calculate the time difference between the current frame and the last frame
+	lastFrame = currentFrame; // Update the last frame time
 }
 
 App::~App()

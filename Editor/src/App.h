@@ -23,7 +23,7 @@ public:
     glm::mat4 GetViewMatrix();
     glm::mat4 GetProjectionMatrix(float aspectRatio);
 
-   // void Timer();
+    void Timer();
 
     void AppShutdown();
 
