@@ -385,6 +385,17 @@ void MainScreen::RenderImGui(GLFWwindow* window)
     }
 }
 
+void MainScreen::ClearScreen()
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glEnable(GL_DEPTH_TEST); // Enable depth testing for 3D rendering
+}
+
+void MainScreen::BgColor(float BgCol[4])
+{
+	glClearColor(BgCol[0], BgCol[1], BgCol[2], BgCol[3]); // Set the main window background color
+}
+
 
 
 

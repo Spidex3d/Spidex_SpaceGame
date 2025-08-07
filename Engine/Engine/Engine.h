@@ -1,24 +1,24 @@
 #pragma once
 #include "Windows/WindowsManager.h"
 
-class Engine
-{
-public:
-    Engine();
-    ~Engine();
-    // Lets remove this file and use windowManager insted
-    GLFWwindow* GetWindow() const;
-
-    bool Init(int width, int height, const char* title);
-    void PollEvents();
-    void BeginFrame();
-    void EndFrame();
-    bool ShouldClose();
-    void Shutdown();
-
-private:
-    WindowsManager* windowManager;
-	
-
-};
+//class Engine
+//{
+//public:
+//    Engine();
+//    ~Engine();
+//    // Lets remove this file and use windowManager insted
+//    GLFWwindow* GetWindow() const;
+//
+//    bool Init(int width, int height, const char* title);
+//    void PollEvents();
+//    void BeginFrame();
+//    void EndFrame();
+//    bool ShouldClose();
+//    void Shutdown();
+//
+//private:
+//    WindowsManager* windowManager;
+//	
+//
+//};
 

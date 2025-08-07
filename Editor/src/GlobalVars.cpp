@@ -11,6 +11,9 @@ bool gridNogrid = false; // toggle for grid visibility
 float grid_square = 2;
 int grid_size = 40;
 
+// Settings
+float BgCol[4] = { 0.0f, 0.0f, 0.0f, 1.0f }; // Background color for the main window
+
 
 
 

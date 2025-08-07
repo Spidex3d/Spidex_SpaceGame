@@ -26,6 +26,9 @@ public:
 
 	void RenderImGui(GLFWwindow* window);     // imgui main imgui rendering
 
+	void ClearScreen();                // clear the screen
+	void BgColor(float BgCol[4]);            // background color
+
 
 private:
 	GLFWwindow* window;

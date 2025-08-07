@@ -1,5 +1,6 @@
 #include "App.h"
-#include "../../Engine/Engine/Engine.h"
+#include "../Engine/Engine/Windows/WindowsManager.h"
+//#include "../../Engine/Engine/Engine.h"
 #include "GUI/MainScreen.h"
 #include "GlobalVars.h"
 
@@ -24,16 +25,28 @@ void App::Initialize(GLFWwindow* window)
 
 void App::RunApp()
 {
-    Engine engine;
-    if (!engine.Init(SCR_WIDTH, SCR_HEIGHT, SCR_TITLE)) {
-        return;
+	WindowsManager windowManager(SCR_WIDTH, SCR_HEIGHT, SCR_TITLE);
+	if (!windowManager.GLFWInitialize()) {
+		return;
     }
-    MainScreen::Instance()->Initialize(window);  //##########
+    else
+    {
+        MainScreen::Instance()->Initialize(windowManager.GetWindow());  //##########
+		glfwSetCursorPosCallback(windowManager.GetWindow(), mouse_callback);
+		glfwSetScrollCallback(windowManager.GetWindow(), scroll_callback);
+        MainScreen::Instance()->SetUpImGui(windowManager.GetWindow());
+    }
+
+    //Engine engine;
+    //if (!engine.Init(SCR_WIDTH, SCR_HEIGHT, SCR_TITLE)) {
+    //    return;
+    //}
+    //MainScreen::Instance()->Initialize(window);  //##########
 
 
-    GLFWwindow* window = engine.GetWindow();
+    //GLFWwindow* window = engine.GetWindow();
 
-    MainScreen::Instance()->SetUpImGui(window);
+    //MainScreen::Instance()->SetUpImGui(window);
 
     ShaderManager::SetupShaders(); // Initialize the shaders
 
@@ -44,27 +57,37 @@ void App::RunApp()
 
     int index = 0, objectIndex = 0, indexTypeID = 0;
 
-    while (!engine.ShouldClose()) {
-        engine.PollEvents();
-        engine.BeginFrame();
+    // while (!engine.ShouldClose()) {
+    while (AppIsRunning) {
+        //engine.PollEvents();
+        //engine.BeginFrame();
 
-		MainScreen::Instance()->WinInit(window); // new imgui frame, menu and dockspace
+        // Timer
+
+		if (glfwWindowShouldClose(windowManager.GetWindow())) {
+			AppIsRunning = false; // Exit the loop if the window should close
+		}
+		processInput(windowManager.GetWindow()); // Process input events
+
+		MainScreen::Instance()->WinInit(windowManager.GetWindow()); // new imgui frame, menu and dockspace
        // MainScreen::Instance()->WinInit(windowManager.GetWindow()); // Initialize all the above
 
-        MainScreen::Instance()->MainSceneWindow(window); // This is the main imgui drawing window for the editor
+        MainScreen::Instance()->MainSceneWindow(windowManager.GetWindow()); // This is the main imgui drawing window for the editor
         
 
-		processInput(window); // Process input events
 
         EntityNode::Instance()->EntityManagmentSystem(entityComponents.GetModels(), currentIndex,
             index, objectIndex, indexTypeID); // Entity Management System Scene list
 
         
         // ############################################# Camera Object !!! ################################
-        App::MainCamera(); // ########## This is the main Camera ##########
 
         RenderDraw::Instance()->Bind_Framebuffer(); // for the main screen
 
+        MainScreen::Instance()->BgColor(BgCol);
+		MainScreen::Instance()->ClearScreen(); // Clear the screen
+
+        App::MainCamera(); // ########## This is the main Camera ##########
         // TODO: Editor/game logic and rendering here
         // Render the grid and then have a coffee
         if (!gridNogrid) {   // Show the grid or hide it
@@ -75,15 +98,17 @@ void App::RunApp()
         }
 
         RenderDraw::Instance()->Unbinde_Frambuffer();
-        MainScreen::Instance()->RenderImGui(window);
 
-       
-        
+        MainScreen::Instance()->RenderImGui(windowManager.GetWindow());
+
+		glfwSwapBuffers(windowManager.GetWindow()); // Swap buffers to display the rendered frame
+		glfwPollEvents(); // Poll for and process events
+  
 		
-        engine.EndFrame();
+       // engine.EndFrame();
     }
 
-    engine.Shutdown();
+   // engine.Shutdown();
 	AppShutdown();
     
 }

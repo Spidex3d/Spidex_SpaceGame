@@ -16,6 +16,9 @@ extern bool gridNogrid; // toggle for grid visibility
 extern float grid_square;
 extern int grid_size;
 
+// Settings
+extern float BgCol[4]; // Background color for the main window
+
 
 extern const int SCR_WIDTH;
 extern const int SCR_HEIGHT;

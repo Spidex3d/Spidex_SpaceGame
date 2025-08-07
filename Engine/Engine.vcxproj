@@ -144,7 +144,6 @@
     <ClInclude Include="Engine\ECS\BaseModel.h" />
     <ClInclude Include="Engine\ECS\EntityNode.h" />
     <ClInclude Include="Engine\ECS\ObjectManager.h" />
-    <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\pch.h" />
     <ClInclude Include="Engine\Shader\Shader.h" />
     <ClInclude Include="Engine\Windows\WindowsManager.h" />
@@ -155,7 +154,6 @@
   <ItemGroup>
     <ClCompile Include="Engine\Camera\Camera.cpp" />
     <ClCompile Include="Engine\ECS\EntityNode.cpp" />
-    <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Engine\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
