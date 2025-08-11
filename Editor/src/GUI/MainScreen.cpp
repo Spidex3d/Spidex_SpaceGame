@@ -1,3 +1,4 @@
+#include <iostream>
 #include "MainScreen.h"
 #include <imgui\ImGuiAF.h>
 #include "../Editor/src/GlobalVars.h"
@@ -123,114 +124,123 @@ void MainScreen::MainSceneWindow(GLFWwindow* window)
     {
         ImGui::OpenPopup("RightClickMenu");
     }
-    // Create the right-click popup menu 
-    if (ImGui::BeginPopup("RightClickMenu"))
-    {
-        if (ImGui::BeginMenu("Add New Space")) {
-            if (ImGui::MenuItem("Add Star field")) {   
-             // this will be a skybox and the Player and the home base
-            }
-			if (ImGui::MenuItem("Add Planets")) {  // this will randomly add a set number of planets to the scene
-				//ShouldAddPlanet = true;
-                
-            }
-			if (ImGui::MenuItem("Add Asteroid's")) {  // this will randomly add asteroids to the scene
-				//ShouldAddAsteroid = true;
-               
-            }
-			if (ImGui::MenuItem("Add random space junk")) { // this will randomly add space junk to the scene
-				//ShouldAddSpaceJunk = true;
-               
+
+    if (!GameFullScreen) { // If game mode hide the main scene window
+
+
+        // Create the right-click popup menu 
+        if (ImGui::BeginPopup("RightClickMenu"))
+        {
+            if (ImGui::BeginMenu("Add New Space")) {
+                if (ImGui::MenuItem("Add Default Level")) {
+                    // this will be a skybox and the Player and the home base, Asteroid's, random space junk
+                       //ShouldAddDefaultLevel = true; // this will add a default level to the scene ShouldAddDefaultLevel = true
+					ShouldAddPlayer = true; // this will add a player to the scene
+					ShowLevelEditor = true; // Show the level editor window
+                }
+                if (ImGui::MenuItem("Add New Level")) {  // this will randomly add a set number of planets to the scene
+                    //ShouldAddPlanet = true;
+
+                }
+                if (ImGui::MenuItem("Test")) {  // this will randomly add asteroids to the scene
+                    //ShouldAddAsteroid = true;
+
+                }
+                if (ImGui::MenuItem("Test 1")) { // this will randomly add space junk to the scene
+                    //ShouldAddSpaceJunk = true;
+
+                }
+
+                ImGui::EndMenu();
             }
 
-            ImGui::EndMenu();
+            if (ImGui::BeginMenu("Add a new mesh")) {
+
+
+                if (ImGui::MenuItem("Add OBJ")) {
+
+                    //ShouldAddEditMesh = true;
+                    //dialogType = false;   // sets is textured or obj file for the opendialog box
+
+                }
+                if (ImGui::MenuItem("Cube")) {
+                    // set ShouldAddCube to true then add cube to the tree
+                    //ShouldAddCube = true;
+                    //dialogType = true;   // sets dialogType is textured or obj file for the opendialog box
+
+                }
+                if (ImGui::MenuItem("Plane")) {
+                    // set ShouldAddPlane to true then add plane to the tree
+                    //ShouldAddPlane = true;
+                    //dialogType = true;
+                }
+                if (ImGui::MenuItem("Sphere")) {
+                    //ShouldAddSphere = true;
+
+                }
+                if (ImGui::MenuItem("Cylinder")) {}
+
+                if (ImGui::MenuItem("Grid")) {}
+
+                if (ImGui::MenuItem("Pyramid")) {
+                    //ShouldAddPyramid = true;
+                }
+
+                ImGui::EndMenu();
+            }
+            if (ImGui::BeginMenu("Add a new Light")) {
+                if (ImGui::MenuItem("Sun Light")) {
+                    //ShouldAddSunLight = true;
+                   // LightSelector = LIGHT_SUN;
+                }
+                if (ImGui::MenuItem("Point Light")) {
+                    // ShouldAddPointLight = true;
+                    // LightSelector = LIGHT_POINT;
+                }
+                if (ImGui::MenuItem("Spot Light")) {
+                    // ShouldAddSpotLight = true;
+                    // LightSelector = LIGHT_SPOT;
+                }
+                if (ImGui::MenuItem("Area Light")) {
+                    //ShouldAddAreaLight = true;
+                    //LightSelector = LIGHT_AREA;
+                }
+
+                ImGui::EndMenu();
+            }
+            if (ImGui::BeginMenu("Add a Terrain")) {
+                if (ImGui::MenuItem("Terrain")) { // This is the main terrain
+                    //ShouldAddTerrain = true;
+                }
+                if (ImGui::MenuItem("Water")) {}
+                if (ImGui::MenuItem("Floor")) {  // This is the floor
+                    //ShouldAddFloor = true;
+                }
+
+                ImGui::EndMenu();
+            }
+            if (ImGui::BeginMenu("Add a Sky")) {
+                if (ImGui::MenuItem("Sky Box")) { // This is the skybox on the main terrain
+
+                }
+                if (ImGui::MenuItem("Hemisphere")) {
+                }
+                if (ImGui::MenuItem("HDRI Skybox")) {
+
+                }
+
+                ImGui::EndMenu();
+            }
+
+            ImGui::EndPopup();
         }
 
-        if (ImGui::BeginMenu("Add a new mesh")) {
 
-            
-            if (ImGui::MenuItem("Add OBJ")) {
+        ImGui::Text("Right-click for popup Menu.");
+	} // end of GameFullScreen if statement
 
-                //ShouldAddEditMesh = true;
-                //dialogType = false;   // sets is textured or obj file for the opendialog box
-
-            }
-            if (ImGui::MenuItem("Cube")) {
-                // set ShouldAddCube to true then add cube to the tree
-                //ShouldAddCube = true;
-                //dialogType = true;   // sets dialogType is textured or obj file for the opendialog box
-
-            }
-            if (ImGui::MenuItem("Plane")) {
-                // set ShouldAddPlane to true then add plane to the tree
-                //ShouldAddPlane = true;
-                //dialogType = true;
-            }
-            if (ImGui::MenuItem("Sphere")) {
-                //ShouldAddSphere = true;
-               
-            }
-            if (ImGui::MenuItem("Cylinder")) {}
-            
-            if (ImGui::MenuItem("Grid")) {}
-           
-            if (ImGui::MenuItem("Pyramid")) {
-                //ShouldAddPyramid = true;
-            }
-
-            ImGui::EndMenu();
-        }
-        if (ImGui::BeginMenu("Add a new Light")) {
-            if (ImGui::MenuItem("Sun Light")) {
-                //ShouldAddSunLight = true;
-               // LightSelector = LIGHT_SUN;
-            }
-            if (ImGui::MenuItem("Point Light")) {
-               // ShouldAddPointLight = true;
-               // LightSelector = LIGHT_POINT;
-            }
-            if (ImGui::MenuItem("Spot Light")) {
-               // ShouldAddSpotLight = true;
-               // LightSelector = LIGHT_SPOT;
-            }
-            if (ImGui::MenuItem("Area Light")) {
-                //ShouldAddAreaLight = true;
-                //LightSelector = LIGHT_AREA;
-            }
-
-            ImGui::EndMenu();
-        }
-        if (ImGui::BeginMenu("Add a Terrain")) {
-            if (ImGui::MenuItem("Terrain")) { // This is the main terrain
-                //ShouldAddTerrain = true;
-            }
-            if (ImGui::MenuItem("Water")) {}
-            if (ImGui::MenuItem("Floor")) {  // This is the floor
-                //ShouldAddFloor = true;
-            }
-
-            ImGui::EndMenu();
-        }
-        if (ImGui::BeginMenu("Add a Sky")) {
-            if (ImGui::MenuItem("Sky Box")) { // This is the skybox on the main terrain
-
-            }
-            if (ImGui::MenuItem("Hemisphere")) {
-            }
-            if (ImGui::MenuItem("HDRI Skybox")) {  
-                
-            }
-
-            ImGui::EndMenu();
-        }
-
-        ImGui::EndPopup();
-    }
-
-
-    ImGui::Text("Right-click for popup Menu.");
-    ImGui::End();
-    ImGui::PopStyleVar();
+        ImGui::End();
+        ImGui::PopStyleVar();
 }
 void MainScreen::MainMenuBar(GLFWwindow* window)
 {
@@ -315,11 +325,22 @@ void MainScreen::MainMenuBar(GLFWwindow* window)
         }
         ImGui::EndMenu();
     }
-    if (ImGui::BeginMenu("Run Game"))
+    if (ImGui::BeginMenu("Editor"))
     {
-        if (ImGui::MenuItem("Run"))
+        if (ImGui::MenuItem("Run Editor"))
         {
+            GameFullScreen = false; // set the game to stop and editor to run
+            std::cout << "Editor is Running" << std::endl;
 
+        }
+        ImGui::EndMenu();
+    }
+    if (ImGui::BeginMenu("Game"))
+    {
+        if (ImGui::MenuItem("Run Game"))
+        {
+			GameFullScreen = true; // set the game to run in fullscreen mode
+		std::cout << "Game is Running" << std::endl;
 
         }
         ImGui::EndMenu();

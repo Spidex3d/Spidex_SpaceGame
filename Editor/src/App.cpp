@@ -7,6 +7,7 @@
 #include "../../Engine/Engine/Camera/Camera.h"
 #include "../../Engine/Engine/Input/Input.h"
 #include "../../Engine/Engine/Shader/ShaderManager.h"
+#include "../../Engine/Engine/ECS/DefaultLevel.h"
 
 App::App()
 {
@@ -30,6 +31,7 @@ void App::RunApp()
     }
     else
     {
+       
         MainScreen::Instance()->Initialize(windowManager.GetWindow());  //##########
 		glfwSetCursorPosCallback(windowManager.GetWindow(), mouse_callback);
 		glfwSetScrollCallback(windowManager.GetWindow(), scroll_callback);
@@ -46,9 +48,10 @@ void App::RunApp()
 
     int index = 0, objectIndex = 0, indexTypeID = 0;
 
-    // while (!engine.ShouldClose()) {
+    
     while (AppIsRunning) {
         
+   
         // Timer
         App::Instance()->Timer();
 
@@ -63,6 +66,8 @@ void App::RunApp()
 
         EntityNode::Instance()->EntityManagmentSystem(entityComponents.GetModels(), currentIndex,
             index, objectIndex, indexTypeID); // Entity Management System Scene list
+
+		DefaultLevel::Instance()->LevelEditorWindow(); // Default Level Editor Window
         
         // ############################################# Camera Object !!! ################################
 
@@ -81,6 +86,10 @@ void App::RunApp()
         }
 
         // TODO: Editor/game logic and rendering here
+        // Darw all objects on screen
+        EntityNode::Instance()->RenderScene(camera.GetViewMatrix(),
+            camera.GetProjectionMatrix((float)SCR_WIDTH / (float)SCR_HEIGHT),
+            entityComponents.GetModels(), currentIndex, *ShaderManager::defaultGridShader, camera);
 
         RenderDraw::Instance()->Unbinde_Frambuffer();
 

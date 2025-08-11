@@ -5,6 +5,8 @@
 #include "BaseModel.h"
 #include "../Editor/src/ECS/SelectedObjectManager.h"
 #include <imgui\imgui.h>
+#include <stb\stb_image.h>
+#include "../Camera/Camera.h"
 
 
 class EntityNode : public BaseModel
@@ -26,8 +28,13 @@ public:
 	void RenderGrid(const glm::mat4& view, const glm::mat4& projection,
 		std::vector<std::unique_ptr<BaseModel>>& ObjectVector, int& currentIndex, int& Gridobjidx);
 
-	/*void RenderScene(const glm::mat4& view, const glm::mat4& projection,
-		std::vector<std::unique_ptr<BaseModel>>& ObjectVector, int& currentIndex, Shader& shader, Camera& camera);*/
+
+	void RenderScene(const glm::mat4& view, const glm::mat4& projection,
+		std::vector<std::unique_ptr<BaseModel>>& ObjectVector, int& currentIndex, Shader& shader, Camera& camera);
+
+		// Cube This is the temperary player model, it will be replaced with a player model later.
+	void RenderCube(const glm::mat4& view, const glm::mat4& projection,
+		std::vector<std::unique_ptr<BaseModel>>& ObjectVector, int& currentIndex, int& PlayerIdx);
 
 	void EntityMainBaseLevel(std::vector<std::unique_ptr<BaseModel>>& ObjectVector, int& currentIndex,
 		int& index, int& objectIndex, int& indexTypeID);

@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\ECS\DefaultLevel.h" />
     <ClInclude Include="Engine\Camera\Camera.h" />
     <ClInclude Include="Engine\ECS\BaseModel.h" />
     <ClInclude Include="Engine\ECS\EntityNode.h" />
@@ -150,8 +151,10 @@
     <ClInclude Include="Engine\Input\Input.h" />
     <ClInclude Include="Engine\Shader\ShaderManager.h" />
     <ClInclude Include="Engine\Render\RenderDraw.h" />
+    <ClInclude Include="Engine\Texture\Textures.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\ECS\DefaultLevel.cpp" />
     <ClCompile Include="Engine\Camera\Camera.cpp" />
     <ClCompile Include="Engine\ECS\EntityNode.cpp" />
     <ClCompile Include="Engine\pch.cpp">
@@ -164,6 +167,7 @@
     <ClCompile Include="Engine\Input\Input.cpp" />
     <ClCompile Include="Engine\Shader\ShaderManager.cpp" />
     <ClCompile Include="Engine\Render\RenderDraw.cpp" />
+    <ClCompile Include="Engine\Texture\Textures.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Shader\ShaderFiles\default_Grid.frag" />
