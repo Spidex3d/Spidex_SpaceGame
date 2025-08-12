@@ -11,7 +11,7 @@ public:
     //static Shader* defaultGLTFShader; // Declare the shader as a static member
     //static Shader* LightBulbShader; // Declare the shader as a static member
     //static Shader* LightShader; // Declare the shader as a static member
-    //static Shader* defaultShader; // Declare the shader as a static member
+    static Shader* defaultShader; // Declare the shader as a static member
     //static Shader* skyShader; // Declare the shader as a static member
     //static Shader* TerrainShader; // Declare the shader as a static member
     //static Shader* TestShader; // Declare the shader as a static member

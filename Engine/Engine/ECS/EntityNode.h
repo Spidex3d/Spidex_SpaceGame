@@ -5,8 +5,8 @@
 #include "BaseModel.h"
 #include "../Editor/src/ECS/SelectedObjectManager.h"
 #include <imgui\imgui.h>
-#include <stb\stb_image.h>
 #include "../Camera/Camera.h"
+#include <stb\stb_image.h>
 
 
 class EntityNode : public BaseModel

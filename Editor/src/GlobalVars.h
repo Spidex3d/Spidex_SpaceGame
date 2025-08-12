@@ -21,6 +21,10 @@ extern int grid_size;
 // Level settings
 extern const int LEVEL_SKY_BOX;
 extern int LevelIdx;
+extern bool ShoulAddStarFeild;
+extern bool ShouldAddPlanets;
+extern bool ShouldAddAsteroids;
+extern bool ShouldAddSpaceJunk;
 extern bool ShouldAddPlayer;
 extern bool ShowLevelEditor;
 // Player

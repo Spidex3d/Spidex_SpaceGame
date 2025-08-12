@@ -77,12 +77,11 @@
     <ClCompile Include="Engine\ECS\DefaultLevel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Texture\Textures.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Shader\ShaderFiles\default_Grid.vert" />
     <None Include="Engine\Shader\ShaderFiles\default_Grid.frag" />
+    <None Include="Engine\Shader\ShaderFiles\default.vert" />
+    <None Include="Engine\Shader\ShaderFiles\default.frag" />
   </ItemGroup>
 </Project>

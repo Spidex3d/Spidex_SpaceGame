@@ -14,6 +14,10 @@ int grid_size = 40;
 // Level settings
 const int LEVEL_SKY_BOX = 30;
 int LevelIdx = 0;
+bool ShoulAddStarFeild = true;
+bool ShouldAddPlanets = true;
+bool ShouldAddAsteroids = true;
+bool ShouldAddSpaceJunk = true;
 bool ShouldAddPlayer = false; // Toggle for adding a player object
 bool ShowLevelEditor = false; // Toggle for showing the level editor window;
 

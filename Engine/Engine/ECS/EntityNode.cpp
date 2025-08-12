@@ -2,6 +2,7 @@
 #include <imgui\ImGuiAF.h>
 #include <imgui\imgui.h>
 #include <imgui\imgui_internal.h>
+#include <stb\stb_image.h>
 #include <iostream>
 #include "../../../Editor/src/GlobalVars.h"
 #include "../../../Engine/Engine/Shader/ShaderManager.h"
@@ -9,6 +10,7 @@
 #include "../../../Engine/Engine/Texture/Textures.h"
 #include "../../../Editor/src/ECS/SelectedObjectManager.h"
 
+unsigned int OBJ_Textures(const std::string& path);
 
 EntityNode* EntityNode::Instance()
 {
@@ -85,9 +87,8 @@ void EntityNode::EntityManagmentSystem(std::vector<std::unique_ptr<BaseModel>>& 
                             switch (data.get()->objectTypeID) {
                             case 0: // Grid
                                 break;
-                            case 1: // cube
-                                // showObjectEditor = true;
-                                // IsTexture = true;
+                            case 1: // cube ! Temp Player
+                                ShowLevelEditor = true;
 
                                 std::cout << "Data Selected  is a Cube " << data->objectName.c_str() << " : " << data->objectIndex << std::endl;
 
@@ -260,7 +261,7 @@ void EntityNode::RenderCube(const glm::mat4& view, const glm::mat4& projection,
     std::vector<std::unique_ptr<BaseModel>>& ObjectVector, int& currentIndex, int& PlayerIdx)
 {
     stbi_set_flip_vertically_on_load(true);
-	Textures textures;
+	
 
     if (ShouldAddPlayer) { // so we add the cube
         PlayerIdx = ObjectVector.size();
@@ -271,7 +272,7 @@ void EntityNode::RenderCube(const glm::mat4& view, const glm::mat4& projection,
         newCube->modelMatrix = glm::translate(glm::mat4(1.0f), newCube->position);
         newCube->modelMatrix = glm::scale(newCube->modelMatrix, newCube->scale);
 
-       // newCube->textureID = textures.OBJ_Textures("Texture/UsedTexture/OBJ_Textures/default_1.jpg");
+        newCube->textureID = OBJ_Textures("Engine/Engine/Texture/UsedTextures/OBJ_Textures/default.jpg");
 
         ObjectVector.push_back(std::move(newCube));
 
@@ -305,9 +306,9 @@ void EntityNode::RenderCube(const glm::mat4& view, const glm::mat4& projection,
     //}
 
     for (const auto& model : ObjectVector) {
-        ShaderManager::defaultGridShader->Use();
-        ShaderManager::defaultGridShader->setMat4("view", view);
-        ShaderManager::defaultGridShader->setMat4("projection", projection);
+        ShaderManager::defaultShader->Use();
+        ShaderManager::defaultShader->setMat4("view", view);
+        ShaderManager::defaultShader->setMat4("projection", projection);
 
 
         /*ApplySunLights(*ShaderManager::defaultShader, view, projection, ObjectVector);
@@ -318,7 +319,7 @@ void EntityNode::RenderCube(const glm::mat4& view, const glm::mat4& projection,
         if (auto* cube = dynamic_cast<CubeModel*>(model.get())) {
             glm::mat4 modelMatrix = glm::mat4(1.0f);
             //modelMatrix = glm::mat4(1.0f);
-            ShaderManager::defaultGridShader->setMat4("model", cube->modelMatrix);
+            ShaderManager::defaultShader->setMat4("model", cube->modelMatrix);
             glActiveTexture(GL_TEXTURE0);
 
             glBindTexture(GL_TEXTURE_2D, cube->textureID);

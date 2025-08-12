@@ -135,7 +135,7 @@ void MainScreen::MainSceneWindow(GLFWwindow* window)
                 if (ImGui::MenuItem("Add Default Level")) {
                     // this will be a skybox and the Player and the home base, Asteroid's, random space junk
                        //ShouldAddDefaultLevel = true; // this will add a default level to the scene ShouldAddDefaultLevel = true
-					ShouldAddPlayer = true; // this will add a player to the scene
+					
 					ShowLevelEditor = true; // Show the level editor window
                 }
                 if (ImGui::MenuItem("Add New Level")) {  // this will randomly add a set number of planets to the scene
@@ -340,7 +340,8 @@ void MainScreen::MainMenuBar(GLFWwindow* window)
         if (ImGui::MenuItem("Run Game"))
         {
 			GameFullScreen = true; // set the game to run in fullscreen mode
-		std::cout << "Game is Running" << std::endl;
+			gridNogrid = true; // Hide the grid in the game mode
+		    std::cout << "Game is Running" << std::endl;
 
         }
         ImGui::EndMenu();

@@ -1,5 +1,3 @@
-//#include "../../Engine/Engine/Engine.h"
-//#include "GUI/MainScreen.h"
 #include "App.h"
 
 // This is my Spidex space game engine start date 30/07/2025
