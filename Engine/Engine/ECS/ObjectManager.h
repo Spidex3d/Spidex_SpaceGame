@@ -81,6 +81,7 @@ public:
 
         position = glm::vec3(0.0f, 0.0f, 0.0f); // Initial position
         scale = glm::vec3(1.0f, 1.0f, 1.0f);    // Initial scale
+		rotation = glm::vec3(0.0f, 0.0f, 0.0f); // Initial rotation
         modelMatrix = glm::mat4(1.0f);
 
 

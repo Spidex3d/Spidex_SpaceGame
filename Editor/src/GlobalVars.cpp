@@ -9,7 +9,7 @@ GLuint main_scene_texture_id = 0; // Main scene texture ID
 // Grid
 bool gridNogrid = false; // toggle for grid visibility
 float grid_square = 2;
-int grid_size = 40;
+int grid_size = 320;
 
 // Level settings
 const int LEVEL_SKY_BOX = 30;

@@ -6,11 +6,13 @@
 #include <iostream>
 #include "../../../Editor/src/GlobalVars.h"
 #include "../../../Engine/Engine/Shader/ShaderManager.h"
-#include "../../../Engine/Engine/ECS/ObjectManager.h"
+// #include "../../../Engine/Engine/ECS/ObjectManager.h"
 #include "../../../Engine/Engine/Texture/Textures.h"
 #include "../../../Editor/src/ECS/SelectedObjectManager.h"
 
+
 unsigned int OBJ_Textures(const std::string& path);
+
 
 EntityNode* EntityNode::Instance()
 {
@@ -28,6 +30,14 @@ void EntityNode::Initialize()
 std::vector<std::unique_ptr<BaseModel>>& EntityNode::GetModels()
 {
     return ObjectVector;
+}
+
+CubeModel* EntityNode::GetPlayerCube(std::vector<std::unique_ptr<BaseModel>>& ObjectVector, int PlayerIdx)
+{
+    if (PlayerIdx >= 0 && PlayerIdx < ObjectVector.size()) {
+        return dynamic_cast<CubeModel*>(ObjectVector[PlayerIdx].get());
+    }
+    return nullptr;
 }
 
 // This function would handle the management of entities in the system.
@@ -119,80 +129,12 @@ void EntityNode::EntityManagmentSystem(std::vector<std::unique_ptr<BaseModel>>& 
                             case 10:
                                 //showObjectEditor = true;
                                 break;
-                            case 11: // pyramid
-                                //showObjectEditor = true;
-
-                                break;
-                            case 12: // 0bj file
-                                //showObjectEditor = true;
-                                //dialogType = false; // set to false and not show the add texture button
-
-                                break;
-                            case 13:
-                                break;
-                            case 14:
-                                //showObjectEditor = true;
-                                //dialogType = false; // set to false and not show the add texture button
-
-                                break;
-                            case 15: // Edit Object cube
-                                //ShowHalfEdgeEditor = true;
-                                break;
-                            case 16: // Not in use
-                                break;
-                            case 17: // Not in use
-                                break;
-                            case 18: // Not in use
-                                break;
-                            case 19: // Not in use
-                                break;
-                            case 20: // sun light LIGHT_SUN
-                                //ShowLightEditor = true;
-                                break;
-                            case 21: // Point
-                                //ShowLightEditor = true;
-
-                                break;
-                            case 22: // Spot
-                                break;
-                            case 23: // Area
-                                //ShowLightEditor = true;
-                                break;
-                            case 24: // Not in use
-                                break;
-                            case 25: // Floor / celing
-                                //showTerrainEditor = true;
-                                //dialogType = true;
-                                break;
-                            case 26:   // Terrain  
-                                //showTerrainEditor = true;
-                                //dialogType = true;
-                                break;
-                            case 27: // Water
-                                //showTerrainEditor = true;
-                                //dialogType = true;
-                                break;
-                            case 28:
-                                break;
-                            case 29:
-                                break;
-                            case 30:
-                                //ShowSkyEditor = true;
-                                //dialogType = true;
-                                break;
-                            case 31:
-                                //ShowSkyEditor = true;
-                                break;
-                            case 32:
-                                //ShowSkyEditor = true;
-                                break;
-
+                            
                             default:
                                 std::cout << "Data Selected Something Else " << data->objectName.c_str() << " : " << data->objectIndex << std::endl;
                                 break;
 
                             }
-
 
                         }
                         if (ImGui::Selectable(ICON_FA_PLUS " New")) {
@@ -265,12 +207,19 @@ void EntityNode::RenderCube(const glm::mat4& view, const glm::mat4& projection,
 
     if (ShouldAddPlayer) { // so we add the cube
         PlayerIdx = ObjectVector.size();
-        std::unique_ptr<CubeModel> newCube = std::make_unique<CubeModel>(currentIndex++, "DefaultCube", PlayerIdx);
+        std::unique_ptr<CubeModel> newCube = std::make_unique<CubeModel>(currentIndex++, "DefaultPlayer", PlayerIdx);
 
         newCube->position = glm::vec3(0.0f, 0.0f, 0.0f);
         newCube->scale = glm::vec3(1.0f, 1.0f, 1.0f);
         newCube->modelMatrix = glm::translate(glm::mat4(1.0f), newCube->position);
         newCube->modelMatrix = glm::scale(newCube->modelMatrix, newCube->scale);
+       // newCube->rotation = glm::vec3(0.0f, 0.0f, 0.0f);
+
+        //newCube->modelMatrix = glm::translate(glm::mat4(1.0f), newCube->position);
+        //newCube->modelMatrix = glm::rotate(newCube->modelMatrix, newCube->rotation.y, glm::vec3(0, 1, 0)); // Yaw
+        //newCube->modelMatrix = glm::rotate(newCube->modelMatrix, newCube->rotation.x, glm::vec3(1, 0, 0)); // Pitch
+        //newCube->modelMatrix = glm::rotate(newCube->modelMatrix, newCube->rotation.z, glm::vec3(0, 0, 1)); // Roll
+       // newCube->modelMatrix = glm::scale(newCube->modelMatrix, newCube->scale);
 
         newCube->textureID = OBJ_Textures("Engine/Engine/Texture/UsedTextures/OBJ_Textures/default.jpg");
 
@@ -279,7 +228,37 @@ void EntityNode::RenderCube(const glm::mat4& view, const glm::mat4& projection,
         ShouldAddPlayer = false; // Reset the flag after adding the cube
     }
 
-    //if (ShouldUpdateCube) { // then we update the cube position and scale
+    
+
+    for (const auto& model : ObjectVector) {
+        ShaderManager::defaultShader->Use();
+        ShaderManager::defaultShader->setMat4("view", view);
+        ShaderManager::defaultShader->setMat4("projection", projection);
+
+        if (auto* cube = dynamic_cast<CubeModel*>(model.get())) {
+            glm::mat4 modelMatrix = glm::mat4(1.0f);
+            cube->modelMatrix = glm::translate(glm::mat4(1.0f), cube->position);
+            cube->modelMatrix = glm::rotate(cube->modelMatrix, cube->rotation.y, glm::vec3(0, 1, 0)); // Yaw
+            cube->modelMatrix = glm::rotate(cube->modelMatrix, cube->rotation.x, glm::vec3(1, 0, 0)); // Pitch
+            cube->modelMatrix = glm::rotate(cube->modelMatrix, cube->rotation.z, glm::vec3(0, 0, 1)); // Roll
+            ShaderManager::defaultShader->setMat4("model", cube->modelMatrix);
+            glActiveTexture(GL_TEXTURE0);
+
+            glBindTexture(GL_TEXTURE_2D, cube->textureID);
+            cube->DrawCube();
+            glBindTexture(GL_TEXTURE_2D, 0);
+        }
+    }
+}
+
+void EntityNode::EntityMainBaseLevel(std::vector<std::unique_ptr<BaseModel>>& ObjectVector,
+    int& currentIndex, int& index, int& objectIndex, int& indexTypeID)
+{
+    // this will set up the base level skybox main planet and the player
+}
+
+
+//if (ShouldUpdateCube) { // then we update the cube position and scale
 
     //    int selectedIndex = SelectedDataManager::Instance().GetSelectedData()->objectIndex;
 
@@ -304,33 +283,3 @@ void EntityNode::RenderCube(const glm::mat4& view, const glm::mat4& projection,
     //    ShouldUpdateCube = false;
 
     //}
-
-    for (const auto& model : ObjectVector) {
-        ShaderManager::defaultShader->Use();
-        ShaderManager::defaultShader->setMat4("view", view);
-        ShaderManager::defaultShader->setMat4("projection", projection);
-
-
-        /*ApplySunLights(*ShaderManager::defaultShader, view, projection, ObjectVector);
-        ApplyPointLights(*ShaderManager::defaultShader, view, projection, ObjectVector);
-        ApplyAreaLights(*ShaderManager::defaultShader, view, projection, ObjectVector);*/
-
-
-        if (auto* cube = dynamic_cast<CubeModel*>(model.get())) {
-            glm::mat4 modelMatrix = glm::mat4(1.0f);
-            //modelMatrix = glm::mat4(1.0f);
-            ShaderManager::defaultShader->setMat4("model", cube->modelMatrix);
-            glActiveTexture(GL_TEXTURE0);
-
-            glBindTexture(GL_TEXTURE_2D, cube->textureID);
-            cube->DrawCube();
-            glBindTexture(GL_TEXTURE_2D, 0);
-        }
-    }
-}
-
-void EntityNode::EntityMainBaseLevel(std::vector<std::unique_ptr<BaseModel>>& ObjectVector,
-    int& currentIndex, int& index, int& objectIndex, int& indexTypeID)
-{
-    // this will set up the base level skybox main planet and the player
-}

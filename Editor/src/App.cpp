@@ -51,13 +51,35 @@ void App::RunApp()
     
     while (AppIsRunning) {
         
-   
-        // Timer
         App::Instance()->Timer();
 
-		if (glfwWindowShouldClose(windowManager.GetWindow())) {
-			AppIsRunning = false; // Exit the loop if the window should close
-		}
+        if (glfwWindowShouldClose(windowManager.GetWindow())) {
+            AppIsRunning = false;
+        }
+
+        CubeModel* playerCube = entityComponents.GetPlayerCube(entityComponents.GetModels(), PlayerIdx);
+        
+
+        processPlayerMovement(windowManager.GetWindow(), playerCube, deltaTime);
+
+        // Camera follow logic
+        if (playerCube) {
+            glm::mat4 rotMatrix = glm::mat4(1.0f);
+            rotMatrix = glm::rotate(rotMatrix, playerCube->rotation.y, glm::vec3(0, 1, 0)); // Yaw
+            rotMatrix = glm::rotate(rotMatrix, playerCube->rotation.x, glm::vec3(1, 0, 0)); // Pitch
+            rotMatrix = glm::rotate(rotMatrix, playerCube->rotation.z, glm::vec3(0, 0, 1)); // Roll
+
+            glm::vec3 forward = glm::vec3(rotMatrix * glm::vec4(0, 0, -1, 0));
+            glm::vec3 up = glm::vec3(rotMatrix * glm::vec4(0, 1, 0, 0));
+            glm::vec3 desiredCameraPos = playerCube->position - forward * 10.0f + up * 3.0f;
+
+            // Optional: smooth the camera movement
+            camera.Position = glm::mix(camera.Position, desiredCameraPos, 0.1f);
+
+            camera.Front = glm::normalize(playerCube->position - camera.Position);
+            camera.updateCameraVectors();
+        }
+  //      
 		processInput(windowManager.GetWindow()); // Process input events
 
 		MainScreen::Instance()->WinInit(windowManager.GetWindow()); // new imgui frame, menu and dockspace

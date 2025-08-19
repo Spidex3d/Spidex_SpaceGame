@@ -14,12 +14,10 @@ public:
     glm::vec3 rotation;     // rotation of the object
     glm::mat4 modelMatrix;  // Model matrix for transformations
 
-    bool isSelected;        // this for the selection in the scene list box
+	bool isSelected;        // this for the selection in the scene list box not sure it should be here or not
 
-    unsigned int textureID;
-
+	unsigned int textureID; // not sure if this should be here or not, but it is needed for the cube model
 
     virtual ~BaseModel() = default;
-    //virtual void RenderImGui() const = 0; // Pure virtual function for ImGui rendering
 
 };
