@@ -89,6 +89,8 @@ void DefaultLevel::LevelEditorWindow()
 			ShouldAddSpaceJunk = true;  // this will add space junk to the scene for collecting
 			ShouldAddPlayer = true;		// this will add a player to the scene
 
+			// save the level settings to a file or database if needed
+
 			// ShouldAddDefaultLevel = true; // This will add a default level to the scene
 			ShowLevelEditor = false; // Hide the level editor window after creating the level
 		}

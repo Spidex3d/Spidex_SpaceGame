@@ -32,10 +32,10 @@ std::vector<std::unique_ptr<BaseModel>>& EntityNode::GetModels()
     return ObjectVector;
 }
 
-CubeModel* EntityNode::GetPlayerCube(std::vector<std::unique_ptr<BaseModel>>& ObjectVector, int PlayerIdx)
+PlayerModel* EntityNode::GetPlayerCube(std::vector<std::unique_ptr<BaseModel>>& ObjectVector, int PlayerIdx)
 {
     if (PlayerIdx >= 0 && PlayerIdx < ObjectVector.size()) {
-        return dynamic_cast<CubeModel*>(ObjectVector[PlayerIdx].get());
+        return dynamic_cast<PlayerModel*>(ObjectVector[PlayerIdx].get());
     }
     return nullptr;
 }
@@ -207,7 +207,7 @@ void EntityNode::RenderCube(const glm::mat4& view, const glm::mat4& projection,
 
     if (ShouldAddPlayer) { // so we add the cube
         PlayerIdx = ObjectVector.size();
-        std::unique_ptr<CubeModel> newCube = std::make_unique<CubeModel>(currentIndex++, "DefaultPlayer", PlayerIdx);
+        std::unique_ptr<PlayerModel> newCube = std::make_unique<PlayerModel>(currentIndex++, "DefaultPlayer", PlayerIdx);
 
         newCube->position = glm::vec3(0.0f, 0.0f, 0.0f);
         newCube->scale = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -235,7 +235,7 @@ void EntityNode::RenderCube(const glm::mat4& view, const glm::mat4& projection,
         ShaderManager::defaultShader->setMat4("view", view);
         ShaderManager::defaultShader->setMat4("projection", projection);
 
-        if (auto* cube = dynamic_cast<CubeModel*>(model.get())) {
+        if (auto* cube = dynamic_cast<PlayerModel*>(model.get())) {
             glm::mat4 modelMatrix = glm::mat4(1.0f);
             cube->modelMatrix = glm::translate(glm::mat4(1.0f), cube->position);
             cube->modelMatrix = glm::rotate(cube->modelMatrix, cube->rotation.y, glm::vec3(0, 1, 0)); // Yaw

@@ -22,7 +22,7 @@ public:
 
 	std::vector<std::unique_ptr<BaseModel>>& GetModels();
 
-	CubeModel* GetPlayerCube(std::vector<std::unique_ptr<BaseModel>>& ObjectVector, int PlayerIdx);
+	PlayerModel* GetPlayerCube(std::vector<std::unique_ptr<BaseModel>>& ObjectVector, int PlayerIdx);
 
 	void EntityManagmentSystem(std::vector<std::unique_ptr<BaseModel>>& ObjectVector, int& currentIndex,
 		int& index, int& objectIndex, int& indexTypeID);

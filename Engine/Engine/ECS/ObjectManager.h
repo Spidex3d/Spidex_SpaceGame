@@ -67,11 +67,11 @@ public:
 
 };
 
-class CubeModel : public BaseModel {
+class PlayerModel : public BaseModel {
 public:
     GLuint VAO, VBO;
 
-    CubeModel(int idx, const std::string& name, int playerIdx) {
+    PlayerModel(int idx, const std::string& name, int playerIdx) {
         index = idx;             // list index
         objectName = name;       // cube name
         objectIndex = playerIdx;         // start index for a cube
@@ -155,7 +155,7 @@ public:
         glEnableVertexAttribArray(0);
     }
 
-    ~CubeModel() {
+    ~PlayerModel() {
         glDeleteVertexArrays(1, &VAO);
         glDeleteBuffers(1, &VBO);
     }

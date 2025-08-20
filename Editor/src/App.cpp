@@ -57,7 +57,7 @@ void App::RunApp()
             AppIsRunning = false;
         }
 
-        CubeModel* playerCube = entityComponents.GetPlayerCube(entityComponents.GetModels(), PlayerIdx);
+        PlayerModel* playerCube = entityComponents.GetPlayerCube(entityComponents.GetModels(), PlayerIdx);
         
 
         processPlayerMovement(windowManager.GetWindow(), playerCube, deltaTime);

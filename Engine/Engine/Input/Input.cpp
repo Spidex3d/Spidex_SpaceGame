@@ -16,7 +16,7 @@ float fov = 45.0f;
 
 
 
-void processPlayerMovement(GLFWwindow* window, CubeModel* playerCube, float deltaTime) {
+void processPlayerMovement(GLFWwindow* window, PlayerModel* playerCube, float deltaTime) {
     if (!playerCube) return;
     float speed = 1.0f * deltaTime;
     float tiltSpeed = glm::radians(40.0f) * deltaTime;
@@ -164,7 +164,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 //float fov = 45.0f;
 //float mouseSensitivity = 0.1f; // Adjust as needed
 //
-//void processPlayerMovement(GLFWwindow* window, CubeModel* playerCube, float deltaTime) {
+//void processPlayerMovement(GLFWwindow* window, PlayerModel* playerCube, float deltaTime) {
 //    if (!playerCube) return;
 //    float speed = 5.0f * deltaTime;
 //    float rotSpeed = 1.5f * deltaTime;
@@ -264,7 +264,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 //}
 //
 
-//void processPlayerMovement(GLFWwindow* window, CubeModel* playerCube, float deltaTime) {
+//void processPlayerMovement(GLFWwindow* window, PlayerModel* playerCube, float deltaTime) {
 //    if (!playerCube) return;
 //
 //    float speed = 5.0f * deltaTime;

@@ -15,7 +15,7 @@ extern float deltaTime;
 extern float lastFrame;
 extern float fov;
 
-void processPlayerMovement(GLFWwindow* window, CubeModel* playerCube, float deltaTime);
+void processPlayerMovement(GLFWwindow* window, PlayerModel* playerCube, float deltaTime);
 
 //void processInput(GLFWwindow* window, Camera& camera);
 void processInput(GLFWwindow* window);
